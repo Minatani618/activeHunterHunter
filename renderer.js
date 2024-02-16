@@ -1,14 +1,16 @@
 const { ipcRenderer } = require("electron");
 const { webOperation } = require("./webOperation.js"); // alertHandler.jsから関数をインポート
 
-ipcRenderer.on("load-email-options", (event, emailOptions) => {
+ipcRenderer.on("load-email-items", (event, emailItems) => {
   const dropdown = document.getElementById("dropdown");
 
-  emailOptions.forEach((option) => {
-    const optionElement = document.createElement("option");
-    optionElement.value = option.email + "-----" + option.pass;
-    optionElement.textContent = option.name;
-    dropdown.appendChild(optionElement);
+  emailItems.forEach((item) => {
+    const itemElement = document.createElement("option");
+    const itemValue= `${item.email}-----${item.pass}`.replace(/"/g,"");
+    const itemText =item.name.replace(/"/g,"")
+    itemElement.value = itemValue
+    itemElement.textContent = itemText
+    dropdown.appendChild(itemElement);
   });
 });
 

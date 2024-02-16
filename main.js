@@ -12,7 +12,7 @@ function createWindow() {
     },
   });
 
-  const userListPath = path.join(__dirname, "userList.csv");
+  const userListPath = path.join(__dirname, "users.csv");
 
   // CSVファイルの読み込み
   fs.readFile(userListPath, "utf-8", (err, data) => {
@@ -24,21 +24,23 @@ function createWindow() {
     // CSVデータの処理（ヘッダーと選択肢の抽出）
     const rows = data.split("\n");
     const header = rows[0].split(",");
-    const emailColumnIndex = header.indexOf("E-Mail");
-    const nameColumnIndex = header.indexOf("社員名");
-    const passColumnIndex = header.indexOf("受信メールパスワード");
+    const emailColumnIndex = header.indexOf('E-Mail');
+    const nameColumnIndex = header.indexOf('社員名');
+    const passColumnIndex = header.indexOf('受信メールパスワード');
+    const kanaColumnIndex=header.indexOf('よみ')
 
-    const emailOptions = rows.slice(1).map((row) => {
+    const emailItems = rows.slice(1).map((row) => {
       const columns = row.split(",");
       const email = columns[emailColumnIndex];
       const name = columns[nameColumnIndex];
       const pass = columns[passColumnIndex];
-      return { email, name, pass };
+      const kana = columns[kanaColumnIndex];
+      return { email, name, pass ,kana };
     });
 
     // レンダラープロセスにデータを送信
     mainWindow.webContents.once("dom-ready", () => {
-      mainWindow.webContents.send("load-email-options", emailOptions);
+      mainWindow.webContents.send("load-email-items", emailItems);
     });
 
     // ウィンドウにHTMLを読み込ませる
