@@ -6,10 +6,10 @@ ipcRenderer.on("load-email-items", (event, emailItems) => {
 
   emailItems.forEach((item) => {
     const itemElement = document.createElement("option");
-    const itemValue= `${item.email}-----${item.pass}`.replace(/"/g,"");
-    const itemText =item.name.replace(/"/g,"")
-    itemElement.value = itemValue
-    itemElement.textContent = itemText
+    const itemValue = `${item.email}-----${item.pass}`.replace(/"/g, "");
+    const itemText = item.name.replace(/"/g, "");
+    itemElement.value = itemValue;
+    itemElement.textContent = itemText;
     dropdown.appendChild(itemElement);
   });
 });

@@ -24,10 +24,10 @@ function createWindow() {
     // CSVデータの処理（ヘッダーと選択肢の抽出）
     const rows = data.split("\n");
     const header = rows[0].split(",");
-    const emailColumnIndex = header.indexOf('E-Mail');
-    const nameColumnIndex = header.indexOf('社員名');
-    const passColumnIndex = header.indexOf('受信メールパスワード');
-    const kanaColumnIndex=header.indexOf('よみ')
+    const emailColumnIndex = header.indexOf("E-Mail");
+    const nameColumnIndex = header.indexOf("社員名");
+    const passColumnIndex = header.indexOf("受信メールパスワード");
+    const kanaColumnIndex = header.indexOf("よみ");
 
     const emailItems = rows.slice(1).map((row) => {
       const columns = row.split(",");
@@ -35,7 +35,7 @@ function createWindow() {
       const name = columns[nameColumnIndex];
       const pass = columns[passColumnIndex];
       const kana = columns[kanaColumnIndex];
-      return { email, name, pass ,kana };
+      return { email, name, pass, kana };
     });
 
     // レンダラープロセスにデータを送信
